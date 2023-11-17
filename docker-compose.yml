@@ -1,29 +1,29 @@
-#
+# Menentukan versi Docker Compose
 version: '2'
-#Membuat service
+# Membuat service item-app
 services:
-  #
+  # Membuat services item-app
   item-app:
     # Menggunakan image item-app dari Github Packages
     image: ghcr.io/fajarhardeka/item-app:v1
-    #
+    # Container selalu restart ketika terhenti
     restart: always
-    #
+    # Port mapping jika dijalankan melalui host
     ports:
       - "80:8080"
-    #
+    # item-app berjalan setelah item-db dijalankan
     depends_on:
       - item-db
-      
-  #
+
+  # Membuat service item-db
   item-db:
-    #
+    # Menggunakan versi mongo se
     image: mongo:3
-    #
+    # Container selalu restart ketika terhenti
     restart : always
-    #
+    # Menentukan volume dengan target /data/db
     volumes:
       - app-db:/data/db
-#      
+# Menentukan satu buah volume       
 volumes:
   app-db:    
