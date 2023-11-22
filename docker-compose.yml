@@ -2,7 +2,7 @@
 version: '2'
 # Membuat service item-app
 services:
-  # Membuat services item-app
+  # Membuat service item-app
   item-app:
     # Menggunakan image item-app dari Github Packages
     image: ghcr.io/fajarhardeka/item-app:v1
@@ -17,7 +17,7 @@ services:
 
   # Membuat service item-db
   item-db:
-    # Menggunakan versi mongo se
+    # Menggunakan versi mongo 3
     image: mongo:3
     # Container selalu restart ketika terhenti
     restart : always
