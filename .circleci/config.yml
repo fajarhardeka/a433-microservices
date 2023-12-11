@@ -9,11 +9,15 @@ jobs:
     executor: 
       name: go/default
       tag: '1.15'
+    working_directory: /path/to/your/go/project
     steps:
       - checkout
       - run:
+          name: Debug
+          command: ls -la
+      - run:
           name: Run Unit Tests
-          command: go test -v -short --count=1 -x $(go list ./ ...)
+          command: go test -v -short --count=1 ./...
 
   build-app-karsajobs:
     executor: docker/docker
