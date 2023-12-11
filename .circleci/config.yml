@@ -13,7 +13,7 @@ jobs:
       - checkout
       - run:
           name: Run Unit Tests
-          command: go test -v -short --count=1 $(go list ./ ...)
+          command: go test -v -short --count=1 -x $(go list ./ ...)
 
   build-app-karsajobs:
     executor: docker/docker
