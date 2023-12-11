@@ -1,0 +1,43 @@
+version: 2.1
+
+orbs:
+  docker: circleci/docker@2.2.0
+  go: circleci/go@1.7.3
+
+jobs:
+  test-app:
+    executor: 
+      name: go/default
+      tag: '1.15'
+    steps:
+      - checkout
+      - run:
+          name: Run Unit Tests
+          command: go test -v -short --count=1 $(go list ./ ...)
+
+  build-app-karsajobs:
+    executor: docker/docker
+    environment:
+      IMAGE_NAME: ghcr.io/fajarhardeka/karsajobs
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Build Docker Image
+          command: docker build -t $IMAGE_NAME:latest .
+      - run:
+          name: Publish Docker Image to Github Container Registry
+          command: |
+            echo "$CR_PAT" | docker login ghcr.io -u "$GHCR_USERNAME" --password-stdin
+            docker push $IMAGE_NAME:latest
+
+workflows:
+  ci:
+    jobs:
+      - docker/hadolint:
+          dockerfiles: './Dockerfile'
+      - test-app
+      - build-app-karsajobs:
+          requires:
+            - docker/hadolint
+            - test-app
