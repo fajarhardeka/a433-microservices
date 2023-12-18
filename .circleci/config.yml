@@ -1,0 +1,26 @@
+version: 2.1
+jobs:
+  lint-dockerfile:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Run hadolint
+          command: docker run --rm --interactive hadolint/hadolint < Dockerfile
+  build-order-service:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: ./build_push_image_os.sh
+workflows:
+  version: 2
+  test-and-build:
+    jobs:
+      - lint-dockerfile
+      - build-order-service:
+          requires:
+            - lint-dockerfile
