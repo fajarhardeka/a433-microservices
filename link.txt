@@ -1,0 +1,3 @@
+link package :
+https://github.com/users/fajarhardeka/packages/container/package/order-service
+https://github.com/users/fajarhardeka/packages/container/package/shipping-service

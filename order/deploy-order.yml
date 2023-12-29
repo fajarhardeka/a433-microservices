@@ -1,0 +1,36 @@
+# Deployment order menggunakan port 3000
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order
+spec:
+  # Label app order
+  selector:
+    matchLabels:
+      app: order
+  template:
+    metadata:
+      labels:
+        app: order
+        version: latest
+  # Menentukan limitasi untuk resource yang digunakan pada istio-proxy
+      annotations:
+        sidecar.istio.io/proxyCPU: 25m
+        sidecar.istio.io/proxyCPULimit: 50m
+        sidecar.istio.io/proxyMemory: 32Mi
+        sidecar.istio.io/proxyMemoryLimit: 64Mi
+    spec:
+      containers:
+  # Menambahkan Container order dari image github packages beserta port yang digunakan
+        - name: order
+          image: ghcr.io/fajarhardeka/order-service:latest
+          imagePullPolicy: IfNotPresent
+          resources: {}
+          ports:
+            - containerPort: 3000
+          env:
+            - name: PORT
+              value: "3000"
+            - name: AMQP_URL
+  # Alamat endpoint pada RabbitMQ dengan username dan password "test"
+              value: amqp://test:test@10.106.220.220:5672             
