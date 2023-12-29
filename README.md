@@ -1,5 +1,8 @@
 Karsajobs
 =============================
+
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/fajarhardeka/a433-microservices/tree/karsajobs.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/fajarhardeka/a433-microservices/tree/karsajobs)
+
 Karsajobs is simple jobs application written in Go.
 
 ## Configuration
