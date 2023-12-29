@@ -1,4 +1,7 @@
 # karsajobs-ui
+
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/fajarhardeka/a433-microservices/tree/karsajobs-ui.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/fajarhardeka/a433-microservices/tree/karsajobs-ui)
+
 Frontend for [karsajobs](https://github.com/dicodingacademy/karsajobs)
 
 ## Project setup
